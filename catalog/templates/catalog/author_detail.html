@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Autor: {{ author }}</h1>
+
+  <p>{{ author.date_of_birth }} - {% if author.date_of_death %}}{{ author.date_of_death }}{% endif %}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Livros</h4>
+
+    {% for livro in author.book_set.all %}
+      <hr>
+      <dt><a href="{% url 'book-detail' livro.pk %}">{{livro}}</a> ({{livro.bookinstance_set.all.count}})</dt>
+      <p><strong>Sumário:</strong> {{livro.summary}} </p>
+      <p class="text-muted"><strong>Id:</strong> {{livro}}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

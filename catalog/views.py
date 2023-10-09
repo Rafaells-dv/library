@@ -14,7 +14,7 @@ def index(request):
     num_authors = Author.objects.count()
 
     num_genre = Genre.objects.count()
-    num_hp_books = BookInstance.objects.filter(book__title__icontains='Harry Potter').count
+    num_hp_books = BookInstance.objects.filter(book__title__icontains='Harry').count
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
@@ -29,3 +29,17 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 10
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = 10
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
