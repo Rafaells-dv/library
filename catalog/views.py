@@ -1,3 +1,4 @@
+from django.views import generic
 from django.shortcuts import render
 from catalog.models import Book, BookInstance, Author, Genre
 
@@ -24,3 +25,7 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
+
+
+class BookListView(generic.ListView):
+    model = Book
