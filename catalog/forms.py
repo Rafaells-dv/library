@@ -2,6 +2,8 @@ from django import forms
 import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+
+
 class RenewBookForm(forms.Form):
     renewal_date = forms.DateField(help_text='Coloque uma data entre agora e 4 semanas. (Padrão 3)')
 

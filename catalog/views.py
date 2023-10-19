@@ -12,6 +12,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from catalog.forms import RenewBookForm
 # Create your views here.
+
+
 def index(request):
 
     num_books = Book.objects.all().count()
@@ -38,13 +40,18 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
+
+
 class TotalBorrowedBooksListView(PermissionRequiredMixin, generic.ListView):
     model = BookInstance
     paginate_by = 10
     template_name = 'catalog/bookinstance_list_all_borrowed_books.html'
     permission_required = 'catalog.can_mark_returned'
+
     def get_queryset(self):
         return BookInstance.objects.filter(status__exact='e').order_by('due_back')
+
+
 class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = BookInstance
@@ -71,9 +78,6 @@ class AuthorListView(generic.ListView):
 
 class AuthorDetailView(generic.DetailView):
     model = Author
-
-
-
 
 
 @permission_required('catalog.can_mark_returned')
